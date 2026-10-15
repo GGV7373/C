@@ -1,15 +1,22 @@
+import sys
+
 def bubbleSort(array):
     for i in range(len(array)):
         for j in range(len(array) - i - 1):
             if array[j] > array[j + 1]:
-                temp = array[j]
-                array[j] = array[j + 1]
-                array[j+1] = temp
+                array[j], array[j + 1] = array[j + 1], array[j]
 
-data = [13, 25, -12 , -2, 45, 0, 11, -9]
+def read_numbers(filename):
+    with open(filename) as f:
+        return [int(x) for x in f.read().split()]
+
+if len(sys.argv) != 2:
+    print(f"Bruk: python3 {sys.argv[0]} <filnavn>")
+    sys.exit(1)
+
+data = read_numbers(sys.argv[1])
 
 bubbleSort(data)
 
 print("Sorted Array in Ascending Order:")
 print(data)
-
