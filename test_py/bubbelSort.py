@@ -10,6 +10,7 @@ def read_numbers(filename):
     with open(filename) as f:
         return [int(x) for x in f.read().split()]
 
+# Reeds file whit data
 if len(sys.argv) != 2:
     print(f"Bruk: python3 {sys.argv[0]} <filnavn>")
     sys.exit(1)
