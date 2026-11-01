@@ -1,25 +1,21 @@
 #include <stdio.h>
 #include <stdbool.h>
+#include <stdlib.h>
 
 int main(void) {
     
-    int i = 0;
-    bool done = false;
-    while (!done) {
-
-        printf("hello, world\n"); /* this just prints hello, world evry line*/   
-        i++;
-        done = (i == 10);
+    int *i = malloc(sizeof(int));
+    if (i == NULL) {
+        fprintf(stderr, "Can't fine the memmory\n"); 
+        return 1;
     }
 
-    int y;
-    int *py = &y;
-
-    y = 123;
-
-    printf("%d\n", y);
-    printf("%p\n", (void *)py);
+    *i= 23;
+    printf("%d\n", *i);
+    *i += 1;
+    printf("%d\n", *i); 
     
+    free(i);
     printf("\nYes it works \n");
     
     return 0;
