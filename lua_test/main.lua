@@ -2,7 +2,7 @@ local function bubblesort(ar)
     local n = #ar
 
     for i = 1, n - 1 do
-        for j = i, n - i do
+        for j = 1, n - i do
             if ar[j] > ar[j + 1] then
                 ar[j], ar[j + 1] = ar[j+ 1], ar[j]
             end
