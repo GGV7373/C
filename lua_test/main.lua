@@ -1,21 +1,25 @@
-local function bubblesort(ar)
-    local n = #ar
+local function bubblesort(arr)
+    local n = #arr
 
     for i = 1, n - 1 do
         for j = 1, n - i do
-            if ar[j] > ar[j + 1] then
-                ar[j], ar[j + 1] = ar[j+ 1], ar[j]
+            if arr[j] > arr[j + 1] then
+                arr[j], arr[j + 1] = arr[j+ 1], arr[j]
             end
         end
     end
-    return ar
+    return arr
 end
 
-local arey = {2, 3, 5 , 2, 6}
+local f = assert(io.open("data/sort.txt", "r"))
+local arr = {}
+for num in f:read("a"):gmatch("%S+") do
+    arr[#arr + 1] = tonumber(num)
+end
+f:close()
 
+bubblesort(arr)
 
-bubblesort(arey)
-
-for i, v in ipairs(arey) do
+for i, v in ipairs(arr) do
     print(i, v)
 end
