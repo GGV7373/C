@@ -1,1 +1,1 @@
-This is only for GGV7373 to make some .c files to practice.
+This is only for GGV7373 to make some .c files to practice. (+- lua too)
