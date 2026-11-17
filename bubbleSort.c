@@ -35,10 +35,11 @@ int main(int argc, char *argv[]) {
         return 1; 
     }
 
-    int data[1000];
+    // fiks to malloc later
+    int data[10000];
     int size = 0;
 
-    while (size < 1000 && fscanf(fp, "%d", &data[size]) == 1) {
+    while (size < 10000 && fscanf(fp, "%d", &data[size]) == 1) {
         size++;
     }
     fclose(fp);
