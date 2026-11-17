@@ -22,7 +22,6 @@ void printArray(int array[], int size) {
     printf("\n");
 }
 
-
 int main(int argc, char *argv[]) {
     if (argc != 2) {
         fprintf(stderr, "Use: %s <filename>\n", argv[0]);
@@ -31,16 +30,33 @@ int main(int argc, char *argv[]) {
     
     FILE *fp = fopen(argv[1], "r");
     if (fp == NULL) {
-        perror("Can not oppen file");
+        perror("Can not open file");
         return 1; 
     }
 
-    // fiks to malloc later
-    int data[10000];
+    int capacity = 16;
     int size = 0;
+    int *data = malloc(capacity * sizeof(int));
+    if (data == NULL) {
+        perror("malloc failed");
+        fclose(fp);
+        return 1;
+    }
 
-    while (size < 10000 && fscanf(fp, "%d", &data[size]) == 1) {
-        size++;
+    int value;
+    while (fscanf(fp, "%d", &value) == 1) {
+        if (size == capacity) {
+            capacity *= 2;
+            int *tmp = realloc(data, capacity * sizeof(int));
+            if (tmp == NULL) {
+                perror("realloc failed");
+                free(data);
+                fclose(fp);
+                return 1;
+            }
+            data = tmp;
+        }
+        data[size++] = value;
     }
     fclose(fp);
 
@@ -49,5 +65,6 @@ int main(int argc, char *argv[]) {
     printf("Sorted Array in Ascending Order: \n");
     printArray(data, size);
 
+    free(data);
     return 0;
 }
