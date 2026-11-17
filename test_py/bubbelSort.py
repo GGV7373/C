@@ -11,13 +11,16 @@ def read_numbers(filename):
         return [int(x) for x in f.read().split()]
 
 # Reeds file whit data
-if len(sys.argv) != 2:
-    print(f"Bruk: python3 {sys.argv[0]} <filnavn>")
+if len(sys.argv) < 2 or len(sys.argv) > 3:
+    print(f"Bruk: python3 {sys.argv[0]} <filnavn> [output filnavn]")
     sys.exit(1)
+
+# Output file name is optional, default is sorted_py.txt
+out_name = sys.argv[2] if len(sys.argv) == 3 else "sorted_py.txt"
 
 data = read_numbers(sys.argv[1])
 
 bubbleSort(data)
 
-print("Sorted Array in Ascending Order:")
-print(data)
+with open(out_name, "w") as f:
+    f.write(" ".join(str(x) for x in data) + "\n")
