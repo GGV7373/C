@@ -15,16 +15,16 @@ void bubbleSort(int array[], int size) {
 }
 
 // Print array
-void printArray(int array[], int size) {
+void printArray(FILE *out, int array[], int size) {
     for(int i = 0; i < size; ++i){
-        printf("%d ", array[i]);
+        fprintf(out, "%d ", array[i]);
     }
-    printf("\n");
+    fprintf(out, "\n");
 }
 
 int main(int argc, char *argv[]) {
-    if (argc != 2) {
-        fprintf(stderr, "Use: %s <filename>\n", argv[0]);
+    if (argc != 3) {
+        fprintf(stderr, "Use: %s <input file> <output file>\n", argv[0]);
         return 1;
     }
     
@@ -62,8 +62,14 @@ int main(int argc, char *argv[]) {
 
     bubbleSort(data, size);
 
-    printf("Sorted Array in Ascending Order: \n");
-    printArray(data, size);
+    FILE *out = fopen(argv[2], "w");
+    if (out == NULL) {
+        perror("Can not open output file");
+        free(data);
+        return 1;
+    }
+    printArray(out, data, size);
+    fclose(out);
 
     free(data);
     return 0;
