@@ -23,10 +23,12 @@ void printArray(FILE *out, int array[], int size) {
 }
 
 int main(int argc, char *argv[]) {
-    if (argc != 3) {
-        fprintf(stderr, "Use: %s <input file> <output file>\n", argv[0]);
+    if (argc < 2 || argc > 3) {
+        fprintf(stderr, "Use: %s <input file> [output file]\n", argv[0]);
         return 1;
     }
+    // Output file name is optional, default is sorted.txt
+    const char *outName = (argc == 3) ? argv[2] : "sorted.txt";
     
     FILE *fp = fopen(argv[1], "r");
     if (fp == NULL) {
@@ -62,7 +64,7 @@ int main(int argc, char *argv[]) {
 
     bubbleSort(data, size);
 
-    FILE *out = fopen(argv[2], "w");
+    FILE *out = fopen(outName, "w");
     if (out == NULL) {
         perror("Can not open output file");
         free(data);
