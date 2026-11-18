@@ -11,7 +11,7 @@ local function bubblesort(arr)
     return arr
 end
 
-local f = assert(io.open("data/sort.txt", "r"))
+local f = assert(io.open(arg[1], "r"))
 local arr = {}
 for num in f:read("a"):gmatch("%S+") do
     arr[#arr + 1] = tonumber(num)
@@ -20,6 +20,6 @@ f:close()
 
 bubblesort(arr)
 
-for i, v in ipairs(arr) do
-    print(i, v)
-end
+local out = assert(io.open(arg[2] or "sorted_lua.txt", "w"))
+out:write(table.concat(arr, " "), "\n")
+out:close()
